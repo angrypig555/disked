@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(disked VERSION 0.1.0 LANGUAGES C)
+project(disked VERSION 0.1.0 LANGUAGES C CXX)
 
-add_executable(disked src/backend-interface.c src/manage-disk.c src/disks.h)
+add_executable(disked src/backend-interface.cpp src/manage-disk.cpp src/disks.hpp)
 
 include(CTest)
 enable_testing()
