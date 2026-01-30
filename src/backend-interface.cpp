@@ -12,7 +12,7 @@ int main() {
     store_path(diskpath, 1);
     try {
       mount_disk(diskpath, 1); // placeholder for testing
-    } catch (const std::filesystem::filesystem_error& error) {
+    } catch (const std::filesystem::filesystem_error& error) { // catches error if not root or sudo
       std::cout << "[critical] filesystem error, are you running as sudo or root? "<< error.what() << std::endl;
       return 1;
     }
