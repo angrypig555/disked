@@ -1,9 +1,13 @@
+// manage-disk.cpp, disk managing interface, handling disks
+// part of disked, under the MIT license
+// see LICENSE for more information
+
 #include<iostream>
 #include<filesystem>
 #include"disks.hpp"
 #include"manage-disk.hpp"
 
-// manage-disk.c is for handling the disk status
+// manage-disk.cpp is for handling the disk status
 
 int store_path(std::string path_to_disk, int drive) {
     switch(drive) {
