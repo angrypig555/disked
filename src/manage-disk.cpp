@@ -38,6 +38,6 @@ int mount_disk(std::string drive, int num) {
   } else {
     std::cout << "[warn] disked mount not found, creating at /mnt/disked/" << std::endl;
     std::filesystem::create_directory("/mnt/disked/");
-  }
+  } // finds if the /mnt/disked/ exists, this is needed so theres a path to  mount the disks
   return 0;
 }

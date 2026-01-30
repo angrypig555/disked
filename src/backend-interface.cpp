@@ -1,4 +1,5 @@
 #include<iostream>
+#include<filesystem>
 #include"manage-disk.hpp"
 
 int main() {
@@ -9,4 +10,10 @@ int main() {
     std::cout << "please enter path to disk 1: ";
     std::cin >> diskpath;
     store_path(diskpath, 1);
+    try {
+      mount_disk(diskpath, 1); // placeholder for testing
+    } catch (const std::filesystem::filesystem_error& error) {
+      std::cout << "[critical] filesystem error, are you running as sudo or root? "<< error.what() << std::endl;
+      return 1;
+    }
 }
