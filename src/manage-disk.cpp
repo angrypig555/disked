@@ -87,10 +87,10 @@ int mount_disk() {
   // defining the mnt command + where the device is 
   //
   std::cout << "[ok] calling mnt on disks..." << std::endl;
-  std::string disk1_command = "mnt " + disk1_path + " " + disk1_mount;
-  std::string disk2_command = "mnt " + disk2_path + " " + disk2_mount;
-  std::string disk3_command = "mnt " + disk3_path + " " + disk3_mount;
-  std::string disk4_command = "mnt " + disk4_path + " " + disk4_mount;
+  std::string disk1_command = "mount " + disk1_path + " " + disk1_mount;
+  std::string disk2_command = "mount " + disk2_path + " " + disk2_mount;
+  std::string disk3_command = "mount " + disk3_path + " " + disk3_mount;
+  std::string disk4_command = "mount " + disk4_path + " " + disk4_mount;
   // running the mounts
   int dsk1cmdr = std::system(disk1_command.c_str());
   if (dsk1cmdr != 0) {

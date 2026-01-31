@@ -25,6 +25,7 @@ disk_entry:
     store_path(diskpath, 3);
     std::cout << "please enter path to disk 4: ";
     std::cin >> diskpath;
+    store_path(diskpath, 4);
     std::cout << "confirm, is this correct?, disks will be mounted after this. last chance y/n " << std::endl;
     print_paths();
     std::cout << "y/n ";
