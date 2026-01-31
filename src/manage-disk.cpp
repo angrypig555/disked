@@ -140,3 +140,114 @@ int safe_exit() {
   }
   return 0; // the reason that it doesnt exit if theres an error because it attempts to unmount the disks if they are saveable
 }
+
+int partition_disk() {
+part_disk_begin:
+        char yesnoin;
+        int disk_to_part; // 1-4
+        std::string disk_to_parts; // path in string
+        specify:
+        std::cout << "please specify a disk from 1-4 ";
+        std::cin >> disk_to_part;
+        switch(disk_to_part) {
+          case 1:
+            disk_to_parts = disk1_path;
+            break;
+          case 2:
+            disk_to_parts = disk2_path;
+            break;
+          case 3:
+            disk_to_parts = disk3_path;
+            break;
+          case 4:
+            disk_to_parts = disk4_path;
+            break;
+          default:
+            goto specify;
+            break;
+        }
+        std::string cfdisk_command = "cfdisk " + disk_to_parts;
+        std::cout << "[ok] calling cfdisk on " << disk_to_parts << std::endl;
+        std::system(cfdisk_command.c_str());
+        std::cout << "would you like to partition another disk?" << std::endl;
+        std::cin >> yesnoin;
+        switch(yesnoin) {
+          case 'y':
+            goto part_disk_begin;
+            break;
+          case 'n':
+            break;
+        }
+        return 0;
+}
+
+int format_disks() {
+  char yesnoin;
+  int format;
+  std::cout << "format disks?(DESTROYS DATA!!!) y/n";
+  std::cin >> yesnoin;
+  switch(yesnoin) {
+    case 'y':
+      int format;
+      format_start:
+      std::cout << "[info] all disks will be formatted the same" << std::endl;
+      std::cout << "please specify format number: 1. ext4; 2. vfat;" << std::endl;
+      std::cin >> format;
+      std::string disk1_format_ext4 = "mkfs.ext4 " + disk1_path; // declaring the commands, same with the string names as before
+      std::string disk2_format_ext4 = "mkfs.ext4 " + disk2_path;
+      std::string disk3_format_ext4 = "mkfs.ext4 " + disk3_path;
+      std::string disk4_format_ext4 = "mkfs.ext4 " + disk4_path;
+      std::string disk1_format_vfat = "mkfs.vfat " + disk1_path;
+      std::string disk2_format_vfat = "mkfs.vfat " + disk2_path;
+      std::string disk3_format_vfat = "mkfs.vfat " + disk3_path;
+      std::string disk4_format_vfat = "mkfs.vfat " + disk4_path;
+      switch(format) {
+        case 1: {
+          std::cout << "[ok] formatting all disks specified as ext4" << std::endl;
+          int dsk1ext4 = std::system(disk1_format_ext4.c_str());
+          if (dsk1ext4 != 0) {
+            throw std::runtime_error("Failed formatting disk 1 as ext4");
+          }
+          int dsk2ext4 = std::system(disk2_format_ext4.c_str());
+          if (dsk2ext4 != 0) {
+            throw std::runtime_error("Failed formatting disk 2 as ext4");
+          }
+          int dsk3ext4 = std::system(disk3_format_ext4.c_str());
+          if (dsk3ext4 != 0) {
+            throw std::runtime_error("Failed formatting disk 3 as ext4");
+          }
+          int dsk4ext4 = std::system(disk4_format_ext4.c_str());
+          if (dsk4ext4 != 0) {
+            throw std::runtime_error("Failed formatting disk 4 as ext4");
+          }
+          break;
+        }
+        case 2: {
+          std::cout << "[ok] formatting all disks specified as vfat" << std::endl;
+          int dsk1vfat = std::system(disk1_format_vfat.c_str());
+          if (dsk1vfat != 0) {
+            throw std::runtime_error("Failed formatting disk 1 as vfat");
+          }
+          int dsk2vfat = std::system(disk2_format_vfat.c_str());
+          if (dsk2vfat != 0) {
+            throw std::runtime_error("Failed formatting disk 2 as vfat");
+          }
+          int dsk3vfat = std::system(disk3_format_vfat.c_str());
+          if (dsk3vfat != 0) {
+            throw std::runtime_error("Failed formatting disk 3 as vfat");
+          }
+          int dsk4vfat = std::system(disk4_format_vfat.c_str());
+          if (dsk4vfat != 0) {
+            throw std::runtime_error("Failed formatting disk 4 as vfat");
+          }
+          break;
+        }
+        default:
+          std::cout << "filesystem not found" << std::endl;
+          goto format_start;
+        
+      }
+
+  }
+  return 0;
+}

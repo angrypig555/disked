@@ -40,6 +40,21 @@ disk_entry:
         goto disk_entry;
         break;
     }
+    std::cout << "would you like to partition any disks? y/n ";
+    std::cin >> yesnoin;
+    switch(yesnoin) {
+      case 'y':
+        partition_disk();
+      default:
+          break;
+        
+    }
+    try {
+      format_disks();
+    } catch (const std::runtime_error& ferror) {
+      std::cerr << "[critical] " << ferror.what() << std::endl;
+      return 1;
+    }
     try {
       mount_disk(); // mounts the disks, found in manage-disk.cpp
     } catch (const std::filesystem::filesystem_error& error) { // catches error if not root or sudo
@@ -49,8 +64,9 @@ disk_entry:
       std::cerr << "[critical] " << rerror.what() << std::endl;
       return 1;
     }
-
+    
     // exit
+  exit:
     try {
       safe_exit();
     } catch (const std::runtime_error& eerror) {
