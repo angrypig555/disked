@@ -4,6 +4,8 @@
 
 #include<iostream>
 #include<filesystem>
+#include<cstdlib>
+#include<stdexcept>
 #include"disks.hpp"
 #include"manage-disk.hpp"
 
@@ -34,7 +36,16 @@ int store_path(std::string path_to_disk, int drive) {
     return 0;
 }
 
-int mount_disk(std::string drive, int num) {
+int print_paths() {
+  // prints paths for confirmation
+  std::cout << "disk 1: " << disk1_path << std::endl;
+  std::cout << "disk 2: " << disk2_path << std::endl;
+  std::cout << "disk 3: " << disk3_path << std::endl;
+  std::cout << "disk 4: " << disk4_path << std::endl;
+  return 0;
+}
+
+int mount_disk() {
   std::string mnt_pathd = "/mnt/disked/";
 
   if (std::filesystem::exists(mnt_pathd) && std::filesystem::is_directory(mnt_pathd)) {
@@ -71,6 +82,35 @@ int mount_disk(std::string drive, int num) {
   } else {
     std::cout << "[warn] disk4 mount not found, creating at /mnt/disked/d4/" << std::endl;
     std::filesystem::create_directory("/mnt/disked/d4/");
+  } // end of searching for mounts, now its mounting time
+    //
+  // defining the mnt command + where the device is 
+  //
+  std::cout << "[ok] calling mnt on disks..." << std::endl;
+  std::string disk1_command = "mnt " + disk1_path + " " + disk1_mount;
+  std::string disk2_command = "mnt " + disk2_path + " " + disk2_mount;
+  std::string disk3_command = "mnt " + disk3_path + " " + disk3_mount;
+  std::string disk4_command = "mnt " + disk4_path + " " + disk4_mount;
+  // running the mounts
+  int dsk1cmdr = std::system(disk1_command.c_str());
+  if (dsk1cmdr != 0) {
+    throw std::runtime_error("Disk 1 mount failed!!! Exiting to prevent damage...");
+    return 1;
   }
+  int dsk2cmdr = std::system(disk2_command.c_str());
+  if (dsk2cmdr != 0) {
+    throw std::runtime_error("Disk 2 mount failed!!! Exiting to prevent damage...");
+    return 1;
+  }
+  int dsk3cmdr = std::system(disk3_command.c_str());
+  if (dsk3cmdr != 0) {
+    throw std::runtime_error("Disk 3 mount failed!!! Exiting to prevent damage...");
+    return 1;
+  }
+  int dsk4cmdr = std::system(disk4_command.c_str());
+  if (dsk4cmdr != 0) {
+    throw std::runtime_error("Disk 4 mount failed!!! Exiting to prevent damage...");
+    return 1;
+  } // a LOT of error checking to not mess up stuff
   return 0;
 }
