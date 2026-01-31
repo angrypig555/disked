@@ -49,4 +49,11 @@ disk_entry:
       std::cerr << "[critical] " << rerror.what() << std::endl;
       return 1;
     }
+
+    // exit
+    try {
+      safe_exit();
+    } catch (const std::runtime_error& eerror) {
+      std::cerr << "[critical] " << eerror.what() << std::endl;
+    }
 }

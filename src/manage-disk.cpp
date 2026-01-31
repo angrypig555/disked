@@ -114,3 +114,29 @@ int mount_disk() {
   } // a LOT of error checking to not mess up stuff
   return 0;
 }
+
+int safe_exit() {
+  std::system("sync"); // syncing and unmounting everything to prevent unintentional writes
+  std::string disk1_umountc = "umount -l " + disk1_path; // these are raw commands that will be converted into dskXu that will be checked if it failed
+  std::string disk2_umountc = "umount -l " + disk2_path; // the abstract variable names like dsk1u literally mean dsk = disk 1 = drive number u = unmount
+  std::string disk3_umountc = "umount -l " + disk3_path; // readable var = string; abstract = system command
+  std::string disk4_umountc = "umount -l " + disk4_path;
+  std::cout << "[ok] unmounting disks..." << std::endl;
+  int dsk1u = std::system(disk1_umountc.c_str());
+  if (dsk1u != 0) {
+    throw std::runtime_error("Disk 1 unmount failed, please unmount manually");
+  }
+  int dsk2u = std::system(disk2_umountc.c_str());
+  if (dsk2u != 0) {
+    throw std::runtime_error("Disk 2 unmount failed, please unmount manually");
+  }
+  int dsk3u = std::system(disk3_umountc.c_str());
+  if (dsk3u != 0) {
+    throw std::runtime_error("Disk 3 unmount failed, please unmount manually");
+  }
+  int dsk4u = std::system(disk4_umountc.c_str());
+  if (dsk4u != 0) {
+    throw std::runtime_error("Disk 4 unmount failed, please unmount manually");
+  }
+  return 0; // the reason that it doesnt exit if theres an error because it attempts to unmount the disks if they are saveable
+}
