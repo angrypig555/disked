@@ -66,7 +66,20 @@ disk_entry:
       std::cerr << "[critical] " << rerror.what() << std::endl;
       return 1;
     }
-    
+    std::cout << "[ok] setup complete, press q to quit, program will continue running until stopped." << std::endl;
+    std::cout << "[warn] only exit with 'q', do not ctrl+c unless absolutely necessary" << std::endl;
+    int running = 1;
+    while (running == 1) {
+      char exitchar;
+      std::cin >> exitchar;
+      switch(exitchar) { // loop to keep the backend interface alive
+        case 'q':
+          running = 0;
+          break;
+        default:
+          break;
+      }
+    }
     // exit
   exit:
     try {
