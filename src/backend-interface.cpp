@@ -11,9 +11,11 @@ int main() {
 
     std::string diskpath;
     char yesnoin;
+    std::cout << "[caution] this is experimental software, whatever you tell it to do it will. double check paths, filesystems, partitions. there are no safeguards" << std::endl; // warning message
     std::cout << "hello from disked backend interface" << std::endl;
     std::cout << "please note 4 disks are required, this will be removed later. if you dont have 4 disks run the disk.sh file to generate 1G ext4 img files at loop" << std::endl;
 disk_entry:
+    show_disks();
     std::cout << "please enter path to disk 1: ";
     std::cin >> diskpath;
     store_path(diskpath, 1);

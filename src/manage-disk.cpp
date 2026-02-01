@@ -251,3 +251,9 @@ int format_disks() {
   }
   return 0;
 }
+
+int show_disks() { // prints the disks before beginning the dangerous stuff
+  std::cout << "[info] disks from lsblk:" << std::endl;
+  std::system("lsblk");
+  return 0;
+}
