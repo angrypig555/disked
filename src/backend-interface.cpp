@@ -7,13 +7,13 @@
 #include"manage-disk.hpp"
 
 int main() {
-    std::cout << "WARNING: THIS PROGRAM IS MEANT TO RUN AS ROOT / SUDO DUE TO INTERFACING WITH DISKS, IF NOT THINGS WILL BREAK!!!" << std::endl; // this is actually important, please run this as sudo or root
+    std::cout << "[warn] WARNING: THIS PROGRAM IS MEANT TO RUN AS ROOT / SUDO DUE TO INTERFACING WITH DISKS, IF NOT THINGS WILL BREAK!!!" << std::endl; // this is actually important, please run this as sudo or root
 
     std::string diskpath;
     char yesnoin;
     std::cout << "[caution] this is experimental software, whatever you tell it to do it will. double check paths, filesystems, partitions. there are no safeguards" << std::endl; // warning message
-    std::cout << "hello from disked backend interface" << std::endl;
-    std::cout << "please note 4 disks are required, this will be removed later. if you dont have 4 disks run the disk.sh file to generate 1G ext4 img files at loop" << std::endl;
+    std::cout << "[info] hello from disked backend interface" << std::endl;
+    std::cout << "[warn] please note 4 disks are required, this will be removed later. if you dont have 4 disks run the disk.sh file to generate 1G ext4 img files at loop" << std::endl;
 disk_entry:
     show_disks();
     std::cout << "please enter path to disk 1: ";

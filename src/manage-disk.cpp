@@ -243,7 +243,7 @@ int format_disks() {
           break;
         }
         default:
-          std::cout << "filesystem not found" << std::endl;
+          std::cout << "[error] filesystem not found" << std::endl;
           goto format_start;
         
       }
